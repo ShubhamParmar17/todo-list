@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import Alert from "./components/Alert";
 import List from "./components/List";
 import "./index.css";
@@ -19,6 +19,9 @@ function App() {
   const [alert, setAlert] = useState({ show: false, msg: "", type: "" });
   const [isEditing, setIsEditing] = useState(false);
   const [editId, setEditId] = useState(null);
+  
+  const todoRefContainer = useRef(null);
+
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -87,14 +90,13 @@ function App() {
 
       {list.length > 0 && (
         <div className="todo-container">
-          <ul className="todo-list">
+          <ul className="todo-list" ref={todoRefContainer}>
             <List items={list} removeItem={removeItem} editItem={editItem} />
             <button
               className="clearAll-btn"
               onClick={() => {
-                const todocontainer = document.querySelector(".todo-list");
-                todocontainer.classList.add("fall");
-                todocontainer.addEventListener("transitionend", () => {
+              todoRefContainer.current.classList.add("fall");
+               todoRefContainer.current.addEventListener("transitionend", () => {
                   setList([]);
                   showAlert(true, "Cleared all!", "success");
                 });
