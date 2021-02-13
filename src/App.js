@@ -1,7 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 import Alert from "./components/Alert";
 import List from "./components/List";
-import "./index.css";
 
 const getData = () => {
   let list = localStorage.getItem("list");
