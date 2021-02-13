@@ -1,5 +1,4 @@
 import React from "react";
-import "../index.css";
 
 const List = ({ items, removeItem, editItem }) => {
   return (
